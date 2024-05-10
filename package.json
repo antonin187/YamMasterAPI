@@ -1,15 +1,19 @@
 {
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev -p 3005",
     "build": "next build",
     "start": "next start"
   },
   "dependencies": {
+    "express": "^4.19.2",
+    "formdata-node": "^6.0.3",
     "mongodb": "^6.5.0",
     "next": "latest",
+    "next-swagger-doc": "^0.4.0",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "swagger-ui-react": "^5.17.7"
   },
   "devDependencies": {
     "@types/node": "18.7.5",
