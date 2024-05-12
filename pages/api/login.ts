@@ -163,15 +163,6 @@ export default async function handler(
     //   break;
 
     // case "DELETE":
-      try {
-        await OrmService.connectAndDeleteOne(
-          MongoConfigService.collections.movies,
-          idMovie
-        );
-        ApiResponseManager.respond(204, res);
-      } catch (error: any) {
-        ApiResponseManager.respond(error.code, res);
-      }
 
       break;
 
