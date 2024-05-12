@@ -9,15 +9,15 @@ import { ApiResponseManager, CustomError } from "../../services/ApiResponseManag
 
 /**
  * @swagger
- * /api/movies:
+ * /api/games:
  *   get:
  *     tags:
- *       - Movies
- *     description: Returns all the movies
+ *       - Games
+ *     description: Returns all games
  *     responses:
  *       200:
- *         description: successful operation
- *         content :
+ *         description: Successful operation
+ *         content:
  *           application/json:
  *             schema:
  *               type: object
@@ -28,49 +28,49 @@ import { ApiResponseManager, CustomError } from "../../services/ApiResponseManag
  *                 data:
  *                   type: array
  *                   items:
- *                     $ref: '#/components/schemas/Movie'
+ *                     $ref: '#/components/schemas/Game'
  *       500:
- *         description: Internal Error
+ *         description: Internal Server Error
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/Response/Error500'
+ *               $ref: '#/components/schemas/Error500'
  *   post:
  *     tags:
- *       - Movies
- *     description: Add a new movie
+ *       - Games
+ *     description: Create a new game
  *     responses:
  *       201:
- *         description: successful operation
+ *         description: Game created successfully
  *         content:
  *           application/json:
  *             schema:
  *               type: object
  *               properties:
  *                 status:
- *                   type: integer,
+ *                   type: integer
  *                   example: 201
  *                 data:
- *                   type: object
- *                   $ref: '#/components/schemas/Movie'
+ *                   $ref: '#/components/schemas/Game'
  *       400:
  *         description: Invalid input
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/Response/Error400'
+ *               $ref: '#/components/schemas/Error400'
  *       500:
- *         description: Internal Error
+ *         description: Internal Server Error
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/Response/Error500'
+ *               $ref: '#/components/schemas/Error500'
  *     requestBody:
- *       description: Create a new movie in the catalogue
+ *       description: Provide the details of the new game
+ *       required: true
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/Movie'
+ *             $ref: '#/components/schemas/NewGameRequest'
  */
 export default async function handler(
   req: NextApiRequest,

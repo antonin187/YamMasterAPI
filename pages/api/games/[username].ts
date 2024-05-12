@@ -15,24 +15,23 @@ interface RequestWithQuery extends NextApiRequest {
  * @swagger
  * tags:
  *   - name: Games
- *     description: Operations related to games
+ *     description: Operations related to games management
  * /api/games/{username}:
  *   get:
  *     tags:
  *       - Games
- *     description: Returns games by username
+ *     description: Retrieve all games associated with a specific username
  *     parameters:
  *       - name: username
  *         in: path
- *         description: Username to find games for
+ *         description: Username to retrieve games for
  *         required: true
  *         schema:
  *           type: string
- *           format: string
  *     responses:
  *       200:
- *         description: successful operation
- *         content :
+ *         description: Successful retrieval of games
+ *         content:
  *           application/json:
  *             schema:
  *               type: object
@@ -45,17 +44,17 @@ interface RequestWithQuery extends NextApiRequest {
  *                   items:
  *                     $ref: '#/components/schemas/Game'
  *       404:
- *         description: Not Found
+ *         description: No games found for the specified username
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/Response/Error404'
+ *               $ref: '#/components/schemas/Error404'
  *       500:
- *         description: Internal Error
+ *         description: Internal Server Error
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/Response/Error500'
+ *               $ref: '#/components/schemas/Error500'
  */
 export default async function handler(
   req: RequestWithQuery,

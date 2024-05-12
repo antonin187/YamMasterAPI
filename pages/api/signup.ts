@@ -7,15 +7,68 @@ import { OrmService } from "../../services/OrmServices";
 import { MongoConfigService } from "../../services/MongoConfigServices";
 import { ApiResponseManager, CustomError } from "../../services/ApiResponseManager";
 
-
+/**
+ * @swagger
+ * tags:
+ *   - name: Authentication
+ *     description: Operations related to user authentication
+ * /api/signup:
+ *   post:
+ *     tags:
+ *       - Authentication
+ *     description: Register a new user
+ *     requestBody:
+ *       description: User data needed to create a new account
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               username:
+ *                 type: string
+ *                 example: "newuser"
+ *               password:
+ *                 type: string
+ *                 example: "password123"
+ *     responses:
+ *       201:
+ *         description: User registered successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 status:
+ *                   type: integer
+ *                   example: 201
+ *                 data:
+ *                   type: object
+ *                   properties:
+ *                     _id:
+ *                       type: string
+ *                       example: "507f1f77bcf86cd799439011"
+ *                     username:
+ *                       type: string
+ *                       example: "newuser"
+ *       400:
+ *         description: Invalid input, data provided is incorrect
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Error400'
+ *       500:
+ *         description: Internal Server Error
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Error500'
+ */
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
   const bodyParam = req.body;
-
-  console.log(bodyParam);
-  
 
   switch (req.method) {
     case "POST":

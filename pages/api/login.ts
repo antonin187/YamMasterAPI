@@ -9,68 +9,30 @@ import { ApiResponseManager } from "../../services/ApiResponseManager";
 /**
  * @swagger
  * tags:
- *   - name: Movies
- *     description: Operations related to movies
- * /api/movie/{idMovie}:
- *   get:
+ *   - name: Authentication
+ *     description: Operations related to user authentication
+ * /api/login:
+ *   post:
  *     tags:
- *       - Movies
- *     description: Returns a movie by its id
- *     parameters:
- *       - name: idMovie
- *         in: path
- *         description: id of the movie to find
- *         required: true
- *         schema:
- *           type: string
- *           format: string
- *     responses:
- *       200:
- *         description: successful operation
- *         content :
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 status:
- *                   type: integer
- *                   example: 200
- *                 data:
- *                   type: object
- *                   $ref: '#/components/schemas/Movie'
- *       404:
- *         description: Not Found
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/Response/Error404'
- *       500:
- *         description: Internal Error
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/Response/Error500'
- *   put:
- *     tags:
- *       - Movies
- *     description: Update a movie
- *     parameters:
- *       - name: idMovie
- *         in: path
- *         description: id of the movie to update
- *         required: true
- *         schema:
- *           type: string
- *           format: string
+ *       - Authentication
+ *     description: Authenticate a user and retrieve their data
  *     requestBody:
- *       description: Update a specific movie
+ *       description: User credentials needed to authenticate
+ *       required: true
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/Movie'
+ *             type: object
+ *             properties:
+ *               username:
+ *                 type: string
+ *                 example: "johndoe"
+ *               password:
+ *                 type: string
+ *                 example: "s3cr3tp4ssw0rd"
  *     responses:
  *       200:
- *         description: successful operation
+ *         description: Successful authentication
  *         content:
  *           application/json:
  *             schema:
@@ -81,46 +43,25 @@ import { ApiResponseManager } from "../../services/ApiResponseManager";
  *                   example: 200
  *                 data:
  *                   type: object
- *                   $ref: '#/components/schemas/Movie'
- *       404:
- *         description: Not Found
+ *                   properties:
+ *                     _id:
+ *                       type: string
+ *                       example: "507f191e810c19729de860ea"
+ *                     username:
+ *                       type: string
+ *                       example: "johndoe"
+ *       400:
+ *         description: Invalid username or password
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/Response/Error404'
+ *               $ref: '#/components/schemas/Error400'
  *       500:
- *         description: Internal Error
+ *         description: Internal Server Error
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/Response/Error500'
- *   delete:
- *     tags:
- *       - Movies
- *     description: Delete a movie
- *     parameters:
- *       - name: idMovie
- *         in: path
- *         description: id of the movie to delete
- *         required: true
- *         schema:
- *           type: string
- *           format: string
- *     responses:
- *       204:
- *         description: Availability resource deleted.
- *       404:
- *         description: Not Found
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/Response/Error404'
- *       500:
- *         description: Internal Error
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/Response/Error500'
+ *               $ref: '#/components/schemas/Error500'
  */
 export default async function handler(
   req: NextApiRequest,
@@ -141,29 +82,6 @@ export default async function handler(
       } catch (error: any) {
         ApiResponseManager.respond(error.code, res);
       }
-      break;
-
-    // case "PUT":
-    //   try {
-    //     await OrmService.connectAndFindOne(
-    //       MongoConfigService.collections.movies,
-    //       idMovie
-    //     );
-    //     const movieToUpdate = await OrmService.connectAndUpdateOne(
-    //       MongoConfigService.collections.movies,
-    //       bodyParam,
-    //       idMovie
-    //     );
-
-    //     ApiResponseManager.respond(200, res, movieToUpdate);
-    //   } catch (error: any) {
-    //     ApiResponseManager.respond(error.code, res);
-    //   }
-
-    //   break;
-
-    // case "DELETE":
-
       break;
 
     default:

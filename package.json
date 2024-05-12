@@ -6,6 +6,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "btoa": "^1.2.1",
     "express": "^4.19.2",
     "formdata-node": "^6.0.3",
     "mongodb": "^6.5.0",
