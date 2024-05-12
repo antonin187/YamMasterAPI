@@ -14,17 +14,17 @@ interface RequestWithQuery extends NextApiRequest {
 /**
  * @swagger
  * tags:
- *   - name: Movies
- *     description: Operations related to movies
- * /api/movie/{idMovie}:
+ *   - name: Games
+ *     description: Operations related to games
+ * /api/games/{username}:
  *   get:
  *     tags:
- *       - Movies
- *     description: Returns a movie by its id
+ *       - Games
+ *     description: Returns games by username
  *     parameters:
- *       - name: idMovie
+ *       - name: username
  *         in: path
- *         description: id of the movie to find
+ *         description: Username to find games for
  *         required: true
  *         schema:
  *           type: string
@@ -41,79 +41,9 @@ interface RequestWithQuery extends NextApiRequest {
  *                   type: integer
  *                   example: 200
  *                 data:
- *                   type: object
- *                   $ref: '#/components/schemas/Movie'
- *       404:
- *         description: Not Found
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/Response/Error404'
- *       500:
- *         description: Internal Error
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/Response/Error500'
- *   put:
- *     tags:
- *       - Movies
- *     description: Update a movie
- *     parameters:
- *       - name: idMovie
- *         in: path
- *         description: id of the movie to update
- *         required: true
- *         schema:
- *           type: string
- *           format: string
- *     requestBody:
- *       description: Update a specific movie
- *       content:
- *         application/json:
- *           schema:
- *             $ref: '#/components/schemas/Movie'
- *     responses:
- *       200:
- *         description: successful operation
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 status:
- *                   type: integer
- *                   example: 200
- *                 data:
- *                   type: object
- *                   $ref: '#/components/schemas/Movie'
- *       404:
- *         description: Not Found
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/Response/Error404'
- *       500:
- *         description: Internal Error
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/Response/Error500'
- *   delete:
- *     tags:
- *       - Movies
- *     description: Delete a movie
- *     parameters:
- *       - name: idMovie
- *         in: path
- *         description: id of the movie to delete
- *         required: true
- *         schema:
- *           type: string
- *           format: string
- *     responses:
- *       204:
- *         description: Availability resource deleted.
+ *                   type: array
+ *                   items:
+ *                     $ref: '#/components/schemas/Game'
  *       404:
  *         description: Not Found
  *         content:
